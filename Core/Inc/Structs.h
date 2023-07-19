@@ -44,6 +44,7 @@ struct State
 	int logNow;
 	int bufferedVars;
 	int loggingEnabled;
+	int targetProductionReached;
 };
 
 struct DrawFrameSettings

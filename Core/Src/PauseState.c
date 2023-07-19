@@ -8,6 +8,7 @@
 #include "functionDefines.h"
 #include "encoder.h"
 #include "Initialize.h"
+#include "Logger.h"
 
 extern UART_HandleTypeDef huart1;
 extern TIM_HandleTypeDef htim7;
@@ -23,6 +24,8 @@ extern int stopSecondaryMotor;
 extern int keyPress;
 extern int buttonTimer;
 extern char out[100];
+extern float totalProduction;
+
 void PauseState(void){
 	char sizeofPacket = 0;
 	while(1){
@@ -48,15 +51,21 @@ void PauseState(void){
 		}
 
 		/******************MOTOR LOGIC*******************/
-		TowerLamp(AMBER_OFF);
-		sliverCut = 0;
+		if(S.targetProductionReached){
+			TowerLamp(GREEN_OFF); // everything ON
+			TowerLamp(RED_OFF);
+			TowerLamp(AMBER_OFF);
+		}else{
+			TowerLamp(AMBER_OFF);
+		}
 		/*************************************************/
 
 		//Wait for a keypress and go back to piecing mode
 		if(buttonTimer >= BUTTON_DEBOUNCE){
 			keyPress = Pushbutton();
 		}
-						
+
+		sliverCut = 0;
 		//TO CHANGE FOR DRAWFRAME
 		if (keyPress == 1){
 			S.state_change = TO_RUN;
@@ -71,6 +80,10 @@ void PauseState(void){
 			S.errVal = NO_VAR;
 			HAL_TIM_Base_Stop_IT(&htim7);
 
+			if (S.targetProductionReached == 1){
+				S.targetProductionReached = 0;
+				totalProduction = 0;
+			}
 			ResetEncoderVariables();
 			ResetMotorVariables();
 

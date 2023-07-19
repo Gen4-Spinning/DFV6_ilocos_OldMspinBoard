@@ -41,6 +41,7 @@ void InitializeStateStruct()
 	S.keyState = ENABLE_D;
 	S.loggingEnabled = 0;
 	S.logType = 0;
+	S.targetProductionReached = 0;
 }
 
 void InitializeDrawFrameSettings()

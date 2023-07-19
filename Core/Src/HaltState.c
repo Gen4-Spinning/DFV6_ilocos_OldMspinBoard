@@ -33,12 +33,6 @@ void HaltState(void)
 						TowerLamp(GREEN_ON);
 						TowerLamp(RED_OFF);
 						TowerLamp(AMBER_ON);
-						if(S.errStopReason == ERR_LENGTH_REACHED)
-						{
-						TowerLamp(GREEN_OFF);
-						TowerLamp(RED_OFF);
-						TowerLamp(AMBER_OFF);
-						}
 						//Stop the UpdateTImer
 						HAL_TIM_Base_Stop_IT(&htim6);
 

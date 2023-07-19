@@ -97,7 +97,13 @@ void RunState(void){
 			keyPress = Pushbutton();
 		}
 
-		if ((keyPress==1) || (sliverCut == 1)){
+		//CHECK FOR COMPLETE LENGTH LIMIT
+		if (totalProduction > dsp.lengthLimit){
+			S.targetProductionReached = 1;
+		}
+
+
+		if ((keyPress==1) || (sliverCut == 1) || (S.targetProductionReached == 1)){
 			S.state_change = TO_PAUSE;
 			S.current_state =  PAUSE_STATE;
 			S.prev_state = RUN_STATE;
@@ -108,10 +114,15 @@ void RunState(void){
 				S.errStopReasonHMI = ERR_USER_PAUSE;
 				S.errmotorFault = NO_VAR;
 				S.errVal = NO_FLOAT_VAR;
+			}else if (S.targetProductionReached == 1){
+				S.errStopReason = ERR_LENGTH_REACHED;
+				S.errStopReasonHMI	 = ERR_LENGTH_REACHED;
+				S.errmotorFault = NO_VAR;
+				S.errVal = NO_FLOAT_VAR;
 			}
 			else{
 				S.errStopReason = ERR_SLIVER_CUT_ERROR;
-				S.errStopReasonHMI	 = ERR_SLIVER_CUT_ERROR;
+				S.errStopReasonHMI = ERR_SLIVER_CUT_ERROR;
 				S.errmotorFault = NO_VAR;
 				S.errVal = NO_FLOAT_VAR;
 			}
@@ -124,14 +135,6 @@ void RunState(void){
 			break;
 		}
 					
-		//CHECK FOR COMPLETE LENGTH LIMIT
-		if (totalProduction > dsp.lengthLimit){
-			E.RpmErrorFlag = 1;
-			S.errStopReason = ERR_LENGTH_REACHED;
-			S.errStopReasonHMI	 = ERR_LENGTH_REACHED;
-			S.errmotorFault = NO_VAR;
-			S.errVal = NO_FLOAT_VAR;
-		}
 		/****************************************************/
 							
 		//Check for RPM ERROR, to go into halt State

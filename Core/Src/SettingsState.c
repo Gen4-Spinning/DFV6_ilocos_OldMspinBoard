@@ -89,8 +89,8 @@ void SettingsState(void){
 			HAL_TIM_Base_Stop_IT(&htim7);
 			S.updateBasePackets = 1;
 			break;
-			}
 		}
+
 	} // close while
 }
 
