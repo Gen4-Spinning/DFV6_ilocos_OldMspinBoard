@@ -64,6 +64,7 @@ void SettingsState(void){
 			HAL_UART_Transmit_IT(&huart1, (uint8_t *)&BufferTransmit, sizeofPacket);
 			U.TXcomplete = 0;
 			U.TXtransfer = 0;
+
 		}
 
 		// From settings allow to go into DIAG
@@ -78,11 +79,17 @@ void SettingsState(void){
 		}
 								
 		if (S.state_change == TO_IDLE){
-			S.current_state =  IDLE_STATE;
+			if (S.prev_state == PAUSE_STATE){
+				S.current_state = PAUSE_STATE;
+			}else{
+				S.current_state = IDLE_STATE;
+			}
+			//S.current_state =  IDLE_STATE;
 			S.prev_state = UPDATESETTINGS;
 			HAL_TIM_Base_Stop_IT(&htim7);
 			S.updateBasePackets = 1;
 			break;
+			}
 		}
 	} // close while
 }

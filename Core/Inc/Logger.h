@@ -6,5 +6,6 @@ void LogMotorVariables(void);
 void LogSettings(void);
 void LogPIDVals(void);
 int EndLine(int bufferIndex );
+void LogMotorVariables(void);
 
 #endif

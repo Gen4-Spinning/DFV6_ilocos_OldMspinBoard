@@ -191,7 +191,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		   if(startFlag == 1){
 			   M[MOTOR1].rampRpm = DFs.rampUp;
 			   updateTargets(MOTOR1, 1);
-			   M[MOTOR2].intTarget = ((M[MOTOR1].intTarget/dsp.tensionDraft)*10.0f) ; // TOCHK
+			   M[MOTOR2].intTarget = getBR_target(M[MOTOR1].intTarget); // TOCHK
 			   M[MOTOR3].intTarget = (M[MOTOR2].intTarget*0.559254f);
 			   followTargets(MOTOR1);
 			   followTargets(MOTOR2);
@@ -200,7 +200,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		   if(startFlag == 0){
 			   M[MOTOR1].rampRpm = DFs.rampDown;
 			   updateTargets(MOTOR1, 0);
-			   M[MOTOR2].intTarget = ((M[MOTOR1].intTarget/dsp.tensionDraft)*10.0f);
+			   M[MOTOR2].intTarget = getBR_target(M[MOTOR1].intTarget);
 			   M[MOTOR3].intTarget = M[MOTOR2].intTarget*0.559254f;  //0.519481f
 			   followTargets(MOTOR1);
 			   followTargets(MOTOR2);

@@ -1,6 +1,7 @@
 #ifndef __FUNCTIONDEFINES_H
 #define __FUNCTIONDEFINES_H
 
+#include "stdio.h"
 void ApplyPwms(void);
 void AllSignalVoltageLow(void);
 void TimerLow(uint8_t index);
@@ -46,5 +47,5 @@ void RunMachine(void);
 
 void updateTargets(uint8_t motorIndex,uint8_t rampUp);
 void followTargets(uint8_t motorIndex);
-
+uint16_t getBR_target(uint16_t FRmotorRPM);
 #endif 

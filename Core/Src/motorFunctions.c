@@ -603,3 +603,20 @@ void ApplyPwms(void)
 	}
  	
 }
+
+
+float req_FR_SR_draft;
+float FR_surfaceSpeed;
+float req_SR_surfaceSpeed;
+float req_BR_surfaceSpeed;
+float req_BR_rpm;
+uint16_t BR_motorRPM;
+uint16_t getBR_target(uint16_t FRmotorRPM){
+	req_FR_SR_draft = dsp.tensionDraft/BREAK_DRAFT_BR_SR;
+	FR_surfaceSpeed = FRmotorRPM * FR_CIRCUMFERENCE/60.0;
+	req_SR_surfaceSpeed = FR_surfaceSpeed/req_FR_SR_draft;
+	req_BR_surfaceSpeed = req_SR_surfaceSpeed/BREAK_DRAFT_BR_SR;
+	req_BR_rpm = req_BR_surfaceSpeed/BR_CIRCUMFERENCE * 60;
+	BR_motorRPM = (uint16_t)req_BR_rpm*BACKROLLER_GEAR_RATIO;
+	return BR_motorRPM;
+}

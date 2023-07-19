@@ -2,6 +2,7 @@
 #include "CommonConstants.h"
 #include "Initialize.h"
 #include "logicDefines.h"
+#include "functionDefines.h"
 #include "HMI_Constants.h"
 #include "CommonConstants.h"
 #include <string.h>
@@ -94,7 +95,7 @@ void MotorStructInit(void)
 		
 		strcpy(M[MOTOR2].name,"___BR") ;
 		M[MOTOR2].presentRpm = 0;
-		M[MOTOR2].setRpm = (M[MOTOR1].setRpm/dsp.tensionDraft)*15.5f;
+		M[MOTOR2].setRpm = getBR_target(M[MOTOR1].setRpm);
 		M[MOTOR2].rampRpm = (M[MOTOR1].rampRpm/dsp.tensionDraft)*15.5f;
 		M[MOTOR2].piecingRpm = 300;
 		M[MOTOR2].error = 0;

@@ -77,7 +77,6 @@ void PauseState(void){
 			TowerLamp(AMBER_ON);
 			startFlag = 1;
 			allMotorsOn = 1;
-			M[MOTOR1].rampRpm = 40;
 			M[MOTOR1].setRpm = dsp.deliverySpeed/((3.141593f*40)/1000);
 			HAL_Delay(500);
 
