@@ -31,6 +31,7 @@ extern int buttonTimer;
 int sliverCut = 0 ;
 int sliverBreak = 0;
 int lapping = 0;
+int sliverCut1 = 0;
 extern char out[100];
 void RunState(void){
 	char sizeofPacket = 0;
@@ -79,7 +80,7 @@ void RunState(void){
 		TowerLamp(GREEN_OFF);
 					
 		//************SLIVER CUT SECTION
-		//sliverCut  = InputSensor1();
+		sliverCut  = InputSensor1();
 		//sliverCut = 0;
 		//*******************************
 		lapping =  LappingSensor();

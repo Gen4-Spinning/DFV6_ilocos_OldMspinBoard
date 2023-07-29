@@ -620,3 +620,20 @@ uint16_t getBR_target(uint16_t FRmotorRPM){
 	BR_motorRPM = (uint16_t)req_BR_rpm*BACKROLLER_GEAR_RATIO;
 	return BR_motorRPM;
 }
+
+
+
+
+float req_creel_surfaceSpeed = 0;
+float req_creel_pulleyRPM = 0;
+float effectiveDia = 0;
+float effectiveCirc = 0;
+float creel_motorRPM = 0;
+uint16_t getCreel_target(void){
+	req_creel_surfaceSpeed = req_BR_surfaceSpeed;
+	effectiveDia = CREEL_DIA + SLIVER_WIDTH;
+	effectiveCirc = 3.14 * effectiveDia;
+	req_creel_pulleyRPM = req_creel_surfaceSpeed/effectiveCirc * 60;
+	creel_motorRPM = (uint16_t)req_creel_pulleyRPM*CREEL_GEARBOX_RATIO;
+	return creel_motorRPM;
+}

@@ -48,4 +48,5 @@ void RunMachine(void);
 void updateTargets(uint8_t motorIndex,uint8_t rampUp);
 void followTargets(uint8_t motorIndex);
 uint16_t getBR_target(uint16_t FRmotorRPM);
+uint16_t getCreel_target(void);
 #endif 

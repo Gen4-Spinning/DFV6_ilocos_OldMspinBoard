@@ -119,8 +119,8 @@ void MotorStructInit(void)
 
 		strcpy(M[MOTOR3].name,"CREEL") ;
 		M[MOTOR3].presentRpm = 0;
-		M[MOTOR3].setRpm = (M[MOTOR2].setRpm*0.529568f);
-		M[MOTOR3].rampRpm = (M[MOTOR2].rampRpm*0.51948f);
+		M[MOTOR3].setRpm = getCreel_target();
+		M[MOTOR3].rampRpm = 10;
 		M[MOTOR3].piecingRpm = 300;
 		M[MOTOR3].error = 0;
 		M[MOTOR3].ff_multiplier = 0;
