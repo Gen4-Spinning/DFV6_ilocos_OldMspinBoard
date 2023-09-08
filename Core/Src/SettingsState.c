@@ -48,6 +48,8 @@ void SettingsState(void){
 				M[motorIdx].ff_multiplier = ((float)P.updateAttr4)/100.0f;
 				//then write the new values into the eeprom
 				WritePIDSettingsIntoEeprom(motorIdx);
+				ResetStartOffsetVars(); // move startOffsetOrig into StartOffset
+
 			}
 			else{// wasnt a motor Update setting, but one of the other DF start/stop var update
 				if ((char)P.updateOptionID == HMI_PID_START_VARS){
